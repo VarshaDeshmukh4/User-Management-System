@@ -1,5 +1,13 @@
 # UserManagement
 
+# email Password:
+For Admin
+admin:-admin@gmail.com
+password:123456
+for User:--
+user:-megha@gmail.com
+password:123456
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
 
 ## Development server
