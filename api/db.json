@@ -1,0 +1,178 @@
+{
+  "Loginuser": [
+    {
+      "id": 1,
+      "name": "Varsha Deshmukh",
+      "phone": "+18555372725",
+      "email": "admin@gmail.com",
+      "role": "Admin",
+      "password": "123456",
+      "age": 35,
+      "address": "173 Bath Avenue, Farmington, New Hampshire, 3445"
+    },
+    {
+      "id": 2,
+      "name": "Ajinkya Deshmukh",
+      "email": "aj@gmail.com",
+      "role": "User",
+      "age": 22,
+      "phone": "+1 9675302757",
+      "address": "195 Maple Avenue, Sparkill, New Mexico, 4597",
+      "password": "123456"
+    },
+    {
+      "id": 3,
+      "name": "Megha Ingle",
+      "email": "megha@gmail.com",
+      "role": "User",
+      "age": 53,
+      "phone": "+1964162156",
+      "address": "626 Madoc Avenue, Caron, South Dakota, 1424",
+      "password": "123456"
+    },
+    {
+      "id": 4,
+      "name": "Prisha  pm",
+      "phone": "+19785962722",
+      "email": "pri@gmail.com",
+      "age": 44,
+      "address": "258 Olive Street, Salix, District Of Columbia, 5350"
+    },
+    {
+      "name": "xcvxcv",
+      "phone": "678676",
+      "email": "SDF@DFSDF",
+      "age": "78",
+      "address": "uiouo",
+      "id": 5
+    },
+    {
+      "name": "xcvxcv",
+      "phone": "6868768",
+      "email": "asdasd@gjhghjghg",
+      "age": "31",
+      "address": "195 Maple Avenue, Sparkill, New Mexico, 4597",
+      "id": 6
+    },
+    {
+      "name": "asbndbmasd",
+      "phone": "698789779",
+      "email": "asdasd@gjhghjghg",
+      "age": "66",
+      "address": "626 Madoc Avenue, Caron, South Dakota, 1424",
+      "id": 7
+    },
+    {
+      "name": "sheela",
+      "phone": "345345345",
+      "email": "sheela@gmail.com",
+      "age": "55",
+      "address": "626 Madoc Avenue, Caron, South Dakota, 1424",
+      "id": 8
+    },
+    {
+      "name": "sheela",
+      "phone": "34534534",
+      "email": "sheela@gmail.com",
+      "age": "55",
+      "address": "626 Madoc Avenue, Caron, South Dakota, 1424",
+      "id": 9
+    },
+    {
+      "id": 10,
+      "name": "Sheela Deshmukh ",
+      "phone": "+18555372725",
+      "email": "sheela@com",
+      "age": "55",
+      "address": "173 Bath Avenue, Farmington, New Hampshire, 3445"
+    },
+    {
+      "name": "varsha11@gmail.com",
+      "phone": "+18555372725",
+      "email": "SDF@DFSDF",
+      "age": "35",
+      "address": "626 Madoc Avenue, Caron, South Dakota, 1424",
+      "id": 11
+    },
+    {
+      "name": "+18555372725",
+      "phone": "",
+      "email": "",
+      "age": "",
+      "address": null,
+      "id": 12
+    },
+    {
+      "name": "d",
+      "phone": "",
+      "email": "",
+      "age": "",
+      "address": null,
+      "id": 13
+    },
+    {
+      "name": "xcvxcv",
+      "phone": "",
+      "email": "",
+      "age": "",
+      "address": null,
+      "id": 14
+    },
+    {
+      "name": "varsha@gmail.com",
+      "phone": "",
+      "email": "",
+      "age": "",
+      "address": null,
+      "id": 15
+    },
+    {
+      "name": "tryrty",
+      "phone": "rtyrty",
+      "email": "yrtyrty",
+      "age": "rtyrty",
+      "address": "rtyrt",
+      "id": 16
+    },
+    {
+      "name": "varsha@gmail.com",
+      "phone": "+18555372725",
+      "email": "asdasd@gjhghjghg",
+      "age": "",
+      "address": "",
+      "id": 17
+    },
+    {
+      "name": "asbndbmasd",
+      "phone": "+18555372725",
+      "email": "deshmukh",
+      "age": "35",
+      "address": "",
+      "id": 18
+    },
+    {
+      "name": "asbndbmasd",
+      "phone": "+18555372725",
+      "email": "deshmukh",
+      "age": "35",
+      "address": "",
+      "id": 19
+    },
+    {
+      "name": "xcvxcv",
+      "phone": "+18555372725",
+      "email": "SDF@DFSDF",
+      "age": "",
+      "address": "",
+      "id": 20
+    },
+    {
+      "name": "varsha47",
+      "phone": "+18555372725",
+      "email": "SDF@DFSDF",
+      "age": "55",
+      "address": "626 Madoc Avenue, Caron, South Dakota, 1424",
+      "id": 21
+    }
+  ]
+}

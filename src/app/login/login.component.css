@@ -1,0 +1,10 @@
+.main-div mat-card{
+    padding: 0px;
+}
+.login-form{
+    padding: 30px;
+}
+.form-element {
+    padding: 5px 0px 25px 2px;
+    width: 100%;
+  }
