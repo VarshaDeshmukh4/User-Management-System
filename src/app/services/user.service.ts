@@ -8,7 +8,7 @@ import { User } from "../model/user";
 })
 export class UserService {
   apiUrl = "http://localhost:3000/Loginuser";
-  headers = new HttpHeaders().set("Content-Type", "application/json");
+
   constructor(private http: HttpClient) {}
 
   getUser(): Observable<User> {
@@ -25,6 +25,6 @@ export class UserService {
   }
   getUserUpdate(id, data): Observable<any> {
     const API_URL = `${this.apiUrl}/${id}`;
-    return this.http.put(API_URL, data, { headers: this.headers });
+    return this.http.put(API_URL, data);
   }
 }

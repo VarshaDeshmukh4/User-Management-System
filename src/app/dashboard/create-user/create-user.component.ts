@@ -22,8 +22,10 @@ export class CreateUserComponent implements OnInit {
       name: ['', Validators.required],
       phone: ['',Validators.required],
       email: ['',Validators.required, Validators.email],
+      role: ['',Validators.required],
       age : ['', [Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]*')]],
-      address: ['']
+      address: [''],
+      password:['',Validators.required]
     });
   }
 
@@ -35,8 +37,10 @@ export class CreateUserComponent implements OnInit {
     data['name'] = this.createUserForm.value.name;
     data['phone'] = this.createUserForm.value.phone;
     data['email'] = this.createUserForm.value.email;
+    data['role'] = this.createUserForm.value.role;
     data['age'] = this.createUserForm.value.age;
     data['address'] = this.createUserForm.value.address;
+    data['password'] = this.createUserForm.value.password;
     if (this.createUserForm.valid) {
       console.log('This is not a valid form.', 'Alert!');
       return

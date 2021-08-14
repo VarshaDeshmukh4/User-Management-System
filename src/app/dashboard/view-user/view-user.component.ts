@@ -33,7 +33,7 @@ export class ViewUserComponent implements OnInit {
   ) {
     const userRole = localStorage.getItem("userRole");
     if (userRole === "user") {
-      console.log(this.userId)
+      console.log(this.userId);
       this.isCheckUser = false;
     } else if (userRole === "Admin") {
       this.isCheckUser = true;
@@ -67,5 +67,4 @@ export class ViewUserComponent implements OnInit {
   addUser() {
     this.router.navigate(["/dashboard/create"]);
   }
-
 }

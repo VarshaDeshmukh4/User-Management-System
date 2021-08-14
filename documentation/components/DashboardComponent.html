@@ -244,8 +244,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/app/dashboard/dashboard.component.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/app/dashboard/dashboard.component.ts:17</a></div>
                 </td>
             </tr>
 
@@ -281,8 +281,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/app/dashboard/dashboard.component.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">src/app/dashboard/dashboard.component.ts:13</a></div>
                 </td>
             </tr>
 
@@ -347,10 +347,11 @@ import { AuthenticationService } from &quot;../services/authentication.service&q
 export class DashboardComponent implements OnInit {
   user: string;
   constructor(private authenticationService: AuthenticationService) {}
+
   ngOnInit() {
     this.user &#x3D; localStorage.getItem(&quot;userName&quot;);
-    console.log(this.user);
   }
+
   logout() {
     this.authenticationService.logout();
   }
@@ -411,7 +412,7 @@ export class DashboardComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-card color="secondary">	<span style="color:#2196f3"> 		<span style="color:dimgray"		>WELCOME:--	</span>	{{ user }}	</span>	<button mat-button color="warn" class="push-right" (click)="logout()">Logout</button></mat-card><router-outlet></router-outlet></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateUserComponent', 'selector': 'app-create-user'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'UpdateUserComponent', 'selector': 'app-update-user'},{'name': 'ViewUserComponent', 'selector': 'app-view-user'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateUserComponent', 'selector': 'app-create-user'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'UpdateUserComponent', 'selector': 'app-update-user'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'ViewUserComponent', 'selector': 'app-view-user'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DashboardComponent'};
 </script>

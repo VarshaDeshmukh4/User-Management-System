@@ -181,7 +181,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, ngZone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, activateRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -228,19 +228,7 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>ngZone</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/core/NgZone" target="_blank" >NgZone</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>activateRoute</td>
+                                                        <td>route</td>
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
@@ -301,8 +289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/dashboard/update-user/update-user.component.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/app/dashboard/update-user/update-user.component.ts:33</a></div>
                 </td>
             </tr>
 
@@ -338,8 +326,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/app/dashboard/update-user/update-user.component.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/dashboard/update-user/update-user.component.ts:53</a></div>
                 </td>
             </tr>
 
@@ -489,45 +477,53 @@ export class UpdateUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private ngZone: NgZone,
-    private activateRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     this.updateUserForm &#x3D; this.formBuilder.group({
       id: [&quot;&quot;],
       name: [&quot;&quot;, Validators.required],
       phone: [&quot;&quot;],
+      role: [&quot;&quot;],
       email: [&quot;&quot;, Validators.email],
       age: [],
       address: [],
+      password: [&quot;&quot;, Validators.required],
     });
   }
   ngOnInit() {
+    this.id &#x3D; this.route.snapshot.paramMap.get(&quot;id&quot;);
     const userRole &#x3D; localStorage.getItem(&quot;userRole&quot;);
     if (userRole &#x3D;&#x3D;&#x3D; &quot;user&quot;) {
       this.isReadonly &#x3D; false;
     } else if (userRole &#x3D;&#x3D;&#x3D; &quot;Admin&quot;) {
       this.isReadonly &#x3D; true;
     }
-    const id &#x3D; this.activateRoute.snapshot.paramMap.get(&quot;id&quot;);
-    this.userService.getUserDetails(id).subscribe((response) &#x3D;&gt; {
+    this.userService.getUserDetails(this.id).subscribe((response) &#x3D;&gt; {
       this.updateUserForm.controls.id.setValue(response.id);
       this.updateUserForm.controls.name.setValue(response.name);
       this.updateUserForm.controls.phone.setValue(response.phone);
       this.updateUserForm.controls.email.setValue(response.email);
       this.updateUserForm.controls.age.setValue(response.age);
       this.updateUserForm.controls.address.setValue(response.address);
+      this.updateUserForm.controls.role.setValue(response.role);
+      this.updateUserForm.controls.password.setValue(response.password);
     });
   }
 
   updateUser() {
-    const id &#x3D; this.activateRoute.snapshot.paramMap.get(&quot;id&quot;);
+    const userId &#x3D; this.route.snapshot.params.id;
+    console.log(userId);
     if (window.confirm(&quot;Are you sure you want to update?&quot;)) {
       this.userService
-        .getUserUpdate(id, this.updateUserForm.value)
+        .getUserUpdate(this.id, this.updateUserForm.value)
         .subscribe((res) &#x3D;&gt; {
-          console.log(res);
-          this.router.navigate([&quot;dashboard&quot;]);
+          const userRole &#x3D; localStorage.getItem(&quot;userRole&quot;);
+          if (userRole &#x3D;&#x3D;&#x3D; &quot;user&quot;) {
+            this.router.navigate([&quot;dashboard&quot;]);
+          } else if (userRole &#x3D;&#x3D;&#x3D; &quot;Admin&quot;) {
+            this.router.navigate([&quot;dashboard&quot;]);
+          }
         });
     }
   }
@@ -537,42 +533,53 @@ export class UpdateUserComponent implements OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div fxLayoutAlign&#x3D;&quot;center center&quot; fxFlexFill class&#x3D;&quot;main-div&quot;&gt;
-	&lt;mat-card fxFlex&#x3D;&quot;40&quot;&gt;
-		&lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;User Form&lt;/mat-toolbar&gt;
-		&lt;form [formGroup]&#x3D;&quot;updateUserForm&quot; (ngSubmit)&#x3D;&quot;updateUser()&quot; fxLayoutAlign&#x3D;&quot;stretch&quot; fxLayout&#x3D;&quot;column&quot; class&#x3D;&quot;login-form&quot;&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Name&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot; Name&quot; formControlName&#x3D;&quot;name&quot; [readonly]&#x3D;&quot;!isReadonly&quot; /&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;name&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;name&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Email&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot;Last Name&quot; formControlName&#x3D;&quot;email&quot; /&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;email&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;email&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Phone&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot;phone&quot; formControlName&#x3D;&quot;phone&quot; /&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;phone&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;phone&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Age&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot;Age&quot; formControlName&#x3D;&quot;age&quot; /&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;age&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;age&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Address&lt;/mat-label&gt;
-				&lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Address&quot; formControlName&#x3D;&quot;address&quot; /&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;address&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;address&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;div&gt;
-				&lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;primary&quot; [disabled]&#x3D;&quot;!updateUserForm.valid&quot;&gt; Update &lt;/button&gt;
-				&lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;secondary&quot; routerLink&#x3D;&quot;/dashboard&quot;&gt; Cancel &lt;/button&gt;
-			&lt;/div&gt;
-		&lt;/form&gt;
-	&lt;/mat-card&gt;
-&lt;/div&gt; 
-{{updateUserForm.value | json}}</code></pre>
+		&lt;mat-card fxFlex&#x3D;&quot;40&quot;&gt;
+			&lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;User Form&lt;/mat-toolbar&gt;
+			&lt;form [formGroup]&#x3D;&quot;updateUserForm&quot; (ngSubmit)&#x3D;&quot;updateUser()&quot; fxLayoutAlign&#x3D;&quot;stretch&quot; fxLayout&#x3D;&quot;column&quot; class&#x3D;&quot;login-form&quot;&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Name&lt;/mat-label&gt;
+					&lt;input matInput placeholder&#x3D;&quot; Name&quot; formControlName&#x3D;&quot;name&quot; [readonly]&#x3D;&quot;!isReadonly&quot; /&gt;
+					&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;name&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;name&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+				&lt;/mat-form-field&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Email&lt;/mat-label&gt;
+					&lt;input matInput placeholder&#x3D;&quot;Last Name&quot; formControlName&#x3D;&quot;email&quot; /&gt;
+					&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;email&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;email&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+				&lt;/mat-form-field&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Phone&lt;/mat-label&gt;
+					&lt;input matInput placeholder&#x3D;&quot;phone&quot; formControlName&#x3D;&quot;phone&quot; /&gt;
+					&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;phone&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;phone&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+				&lt;/mat-form-field&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Age&lt;/mat-label&gt;
+					&lt;input matInput placeholder&#x3D;&quot;Age&quot; formControlName&#x3D;&quot;age&quot; /&gt;
+					&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;age&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;age&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+				&lt;/mat-form-field&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Role&lt;/mat-label&gt;
+					&lt;mat-select formControlName&#x3D;&quot;role&quot; placeholder&#x3D;&quot;Roles&quot;&gt;
+						&lt;mat-option [value]&#x3D;&quot;&#x27;Admin&#x27;&quot;&gt;Admin&lt;/mat-option&gt;
+						&lt;mat-option [value]&#x3D;&quot;&#x27;User&#x27;&quot;&gt;User&lt;/mat-option&gt;
+					&lt;/mat-select&gt;
+				&lt;/mat-form-field&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Address&lt;/mat-label&gt;
+					&lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Address&quot; formControlName&#x3D;&quot;address&quot; /&gt;
+					&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;address&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;address&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+				&lt;/mat-form-field&gt;
+				&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+					&lt;mat-label&gt;Password&lt;/mat-label&gt;
+					&lt;input matInput type&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
+					&lt;mat-error *ngIf&#x3D;&quot;!updateUserForm.controls[&#x27;password&#x27;].valid &amp;&amp; updateUserForm.controls[&#x27;password&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+				&lt;/mat-form-field&gt;
+				&lt;div&gt;
+					&lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;primary&quot; [disabled]&#x3D;&quot;!updateUserForm.valid&quot;&gt; Update &lt;/button&gt;
+					&lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;secondary&quot; routerLink&#x3D;&quot;/dashboard&quot;&gt; Cancel &lt;/button&gt;
+				&lt;/div&gt;
+			&lt;/form&gt;
+		&lt;/mat-card&gt;
+	&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -607,8 +614,8 @@ export class UpdateUserComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div fxLayoutAlign="center center" fxFlexFill class="main-div">	<mat-card fxFlex="40">		<mat-toolbar color="primary">User Form</mat-toolbar>		<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()" fxLayoutAlign="stretch" fxLayout="column" class="login-form">			<mat-form-field class="form-element">				<mat-label>Name</mat-label>				<input matInput placeholder=" Name" formControlName="name" [readonly]="!isReadonly" />				<mat-error *ngIf="!updateUserForm.controls[\'name\'].valid && updateUserForm.controls[\'name\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Email</mat-label>				<input matInput placeholder="Last Name" formControlName="email" />				<mat-error *ngIf="!updateUserForm.controls[\'email\'].valid && updateUserForm.controls[\'email\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Phone</mat-label>				<input matInput placeholder="phone" formControlName="phone" />				<mat-error *ngIf="!updateUserForm.controls[\'phone\'].valid && updateUserForm.controls[\'phone\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Age</mat-label>				<input matInput placeholder="Age" formControlName="age" />				<mat-error *ngIf="!updateUserForm.controls[\'age\'].valid && updateUserForm.controls[\'age\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Address</mat-label>				<input matInput type="text" placeholder="Address" formControlName="address" />				<mat-error *ngIf="!updateUserForm.controls[\'address\'].valid && updateUserForm.controls[\'address\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<div>				<button mat-raised-button type="submit" color="primary" [disabled]="!updateUserForm.valid"> Update </button>				<button mat-raised-button type="submit" color="secondary" routerLink="/dashboard"> Cancel </button>			</div>		</form>	</mat-card></div> {{updateUserForm.value | json}}</div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateUserComponent', 'selector': 'app-create-user'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'UpdateUserComponent', 'selector': 'app-update-user'},{'name': 'ViewUserComponent', 'selector': 'app-view-user'}];
+        var COMPONENT_TEMPLATE = '<div><div fxLayoutAlign="center center" fxFlexFill class="main-div">		<mat-card fxFlex="40">			<mat-toolbar color="primary">User Form</mat-toolbar>			<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()" fxLayoutAlign="stretch" fxLayout="column" class="login-form">				<mat-form-field class="form-element">					<mat-label>Name</mat-label>					<input matInput placeholder=" Name" formControlName="name" [readonly]="!isReadonly" />					<mat-error *ngIf="!updateUserForm.controls[\'name\'].valid && updateUserForm.controls[\'name\'].touched"> {{ titleAlert }} </mat-error>				</mat-form-field>				<mat-form-field class="form-element">					<mat-label>Email</mat-label>					<input matInput placeholder="Last Name" formControlName="email" />					<mat-error *ngIf="!updateUserForm.controls[\'email\'].valid && updateUserForm.controls[\'email\'].touched"> {{ titleAlert }} </mat-error>				</mat-form-field>				<mat-form-field class="form-element">					<mat-label>Phone</mat-label>					<input matInput placeholder="phone" formControlName="phone" />					<mat-error *ngIf="!updateUserForm.controls[\'phone\'].valid && updateUserForm.controls[\'phone\'].touched"> {{ titleAlert }} </mat-error>				</mat-form-field>				<mat-form-field class="form-element">					<mat-label>Age</mat-label>					<input matInput placeholder="Age" formControlName="age" />					<mat-error *ngIf="!updateUserForm.controls[\'age\'].valid && updateUserForm.controls[\'age\'].touched"> {{ titleAlert }} </mat-error>				</mat-form-field>				<mat-form-field class="form-element">					<mat-label>Role</mat-label>					<mat-select formControlName="role" placeholder="Roles">						<mat-option [value]="\'Admin\'">Admin</mat-option>						<mat-option [value]="\'User\'">User</mat-option>					</mat-select>				</mat-form-field>				<mat-form-field class="form-element">					<mat-label>Address</mat-label>					<input matInput type="text" placeholder="Address" formControlName="address" />					<mat-error *ngIf="!updateUserForm.controls[\'address\'].valid && updateUserForm.controls[\'address\'].touched"> {{ titleAlert }} </mat-error>				</mat-form-field>				<mat-form-field class="form-element">					<mat-label>Password</mat-label>					<input matInput type="password" placeholder="Password" formControlName="password">					<mat-error *ngIf="!updateUserForm.controls[\'password\'].valid && updateUserForm.controls[\'password\'].touched"> {{ titleAlert }} </mat-error>				</mat-form-field>				<div>					<button mat-raised-button type="submit" color="primary" [disabled]="!updateUserForm.valid"> Update </button>					<button mat-raised-button type="submit" color="secondary" routerLink="/dashboard"> Cancel </button>				</div>			</form>		</mat-card>	</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateUserComponent', 'selector': 'app-create-user'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'UpdateUserComponent', 'selector': 'app-update-user'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'ViewUserComponent', 'selector': 'app-view-user'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UpdateUserComponent'};
 </script>

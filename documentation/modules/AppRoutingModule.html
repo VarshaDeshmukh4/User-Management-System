@@ -80,15 +80,17 @@ import { CreateUserComponent } from &quot;./dashboard/create-user/create-user.co
 import { UpdateUserComponent } from &quot;./dashboard/update-user/update-user.component&quot;;
 import { ViewUserComponent } from &quot;./dashboard/view-user/view-user.component&quot;;
 import { AuthGuard } from &quot;./authGuard/auth.guard&quot;;
+import { UserPageComponent } from &#x27;./dashboard/user-page/user-page.component&#x27;;
 
 const routes: Routes &#x3D; [
   { path: &quot;&quot;, component: LoginComponent },
   {
     path: &quot;dashboard&quot;,
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+  // canActivate: [AuthGuard],
     children: [
       { path: &quot;&quot;, component: ViewUserComponent },
+      { path: &quot;userpage/:id&quot;, component: UserPageComponent },
       { path: &quot;create&quot;, component: CreateUserComponent },
       { path: &quot;update/:id&quot;, component: UpdateUserComponent },
     ],

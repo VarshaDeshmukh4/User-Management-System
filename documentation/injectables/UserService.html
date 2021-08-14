@@ -79,9 +79,6 @@
                             <li>
                                 <a href="#apiUrl" >apiUrl</a>
                             </li>
-                            <li>
-                                <a href="#headers" >headers</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -132,7 +129,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/user.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/user.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -514,31 +511,6 @@
 
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="headers"></a>
-                    <span class="name">
-                        <span ><b>headers</b></span>
-                        <a href="#headers"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new HttpHeaders().set(&quot;Content-Type&quot;, &quot;application/json&quot;)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/user.service.ts:11</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
 </section>
 
     </div>
@@ -555,7 +527,7 @@ import { User } from &quot;../model/user&quot;;
 })
 export class UserService {
   apiUrl &#x3D; &quot;http://localhost:3000/Loginuser&quot;;
-  headers &#x3D; new HttpHeaders().set(&quot;Content-Type&quot;, &quot;application/json&quot;);
+
   constructor(private http: HttpClient) {}
 
   getUser(): Observable&lt;User&gt; {
@@ -572,7 +544,7 @@ export class UserService {
   }
   getUserUpdate(id, data): Observable&lt;any&gt; {
     const API_URL &#x3D; &#x60;${this.apiUrl}/${id}&#x60;;
-    return this.http.put(API_URL, data, { headers: this.headers });
+    return this.http.put(API_URL, data);
   }
 }
 </code></pre>

@@ -1,37 +1,48 @@
 <div fxLayoutAlign="center center" fxFlexFill class="main-div">
-	<mat-card fxFlex="40">
-		<mat-toolbar color="primary">User Form</mat-toolbar>
-		<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
-			<mat-form-field class="form-element">
-				<mat-label>Name</mat-label>
-				<input matInput placeholder=" Name" formControlName="name" [readonly]="!isReadonly" />
-				<mat-error *ngIf="!updateUserForm.controls['name'].valid && updateUserForm.controls['name'].touched"> {{ titleAlert }} </mat-error>
-			</mat-form-field>
-			<mat-form-field class="form-element">
-				<mat-label>Email</mat-label>
-				<input matInput placeholder="Last Name" formControlName="email" />
-				<mat-error *ngIf="!updateUserForm.controls['email'].valid && updateUserForm.controls['email'].touched"> {{ titleAlert }} </mat-error>
-			</mat-form-field>
-			<mat-form-field class="form-element">
-				<mat-label>Phone</mat-label>
-				<input matInput placeholder="phone" formControlName="phone" />
-				<mat-error *ngIf="!updateUserForm.controls['phone'].valid && updateUserForm.controls['phone'].touched"> {{ titleAlert }} </mat-error>
-			</mat-form-field>
-			<mat-form-field class="form-element">
-				<mat-label>Age</mat-label>
-				<input matInput placeholder="Age" formControlName="age" />
-				<mat-error *ngIf="!updateUserForm.controls['age'].valid && updateUserForm.controls['age'].touched"> {{ titleAlert }} </mat-error>
-			</mat-form-field>
-			<mat-form-field class="form-element">
-				<mat-label>Address</mat-label>
-				<input matInput type="text" placeholder="Address" formControlName="address" />
-				<mat-error *ngIf="!updateUserForm.controls['address'].valid && updateUserForm.controls['address'].touched"> {{ titleAlert }} </mat-error>
-			</mat-form-field>
-			<div>
-				<button mat-raised-button type="submit" color="primary" [disabled]="!updateUserForm.valid"> Update </button>
-				<button mat-raised-button type="submit" color="secondary" routerLink="/dashboard"> Cancel </button>
-			</div>
-		</form>
-	</mat-card>
-</div> 
-{{updateUserForm.value | json}}
+		<mat-card fxFlex="40">
+			<mat-toolbar color="primary">User Form</mat-toolbar>
+			<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+				<mat-form-field class="form-element">
+					<mat-label>Name</mat-label>
+					<input matInput placeholder=" Name" formControlName="name" [readonly]="!isReadonly" />
+					<mat-error *ngIf="!updateUserForm.controls['name'].valid && updateUserForm.controls['name'].touched"> {{ titleAlert }} </mat-error>
+				</mat-form-field>
+				<mat-form-field class="form-element">
+					<mat-label>Email</mat-label>
+					<input matInput placeholder="Last Name" formControlName="email" />
+					<mat-error *ngIf="!updateUserForm.controls['email'].valid && updateUserForm.controls['email'].touched"> {{ titleAlert }} </mat-error>
+				</mat-form-field>
+				<mat-form-field class="form-element">
+					<mat-label>Phone</mat-label>
+					<input matInput placeholder="phone" formControlName="phone" />
+					<mat-error *ngIf="!updateUserForm.controls['phone'].valid && updateUserForm.controls['phone'].touched"> {{ titleAlert }} </mat-error>
+				</mat-form-field>
+				<mat-form-field class="form-element">
+					<mat-label>Age</mat-label>
+					<input matInput placeholder="Age" formControlName="age" />
+					<mat-error *ngIf="!updateUserForm.controls['age'].valid && updateUserForm.controls['age'].touched"> {{ titleAlert }} </mat-error>
+				</mat-form-field>
+				<mat-form-field class="form-element">
+					<mat-label>Role</mat-label>
+					<mat-select formControlName="role" placeholder="Roles">
+						<mat-option [value]="'Admin'">Admin</mat-option>
+						<mat-option [value]="'User'">User</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="form-element">
+					<mat-label>Address</mat-label>
+					<input matInput type="text" placeholder="Address" formControlName="address" />
+					<mat-error *ngIf="!updateUserForm.controls['address'].valid && updateUserForm.controls['address'].touched"> {{ titleAlert }} </mat-error>
+				</mat-form-field>
+				<mat-form-field class="form-element">
+					<mat-label>Password</mat-label>
+					<input matInput type="password" placeholder="Password" formControlName="password">
+					<mat-error *ngIf="!updateUserForm.controls['password'].valid && updateUserForm.controls['password'].touched"> {{ titleAlert }} </mat-error>
+				</mat-form-field>
+				<div>
+					<button mat-raised-button type="submit" color="primary" [disabled]="!updateUserForm.valid"> Update </button>
+					<button mat-raised-button type="submit" color="secondary" routerLink="/dashboard"> Cancel </button>
+				</div>
+			</form>
+		</mat-card>
+	</div>

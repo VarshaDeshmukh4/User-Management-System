@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -24,6 +24,8 @@ import { UpdateUserComponent } from './dashboard/update-user/update-user.compone
 import { ViewUserComponent } from './dashboard/view-user/view-user.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { UserPageComponent } from './dashboard/user-page/user-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DashboardComponent,
     CreateUserComponent,
     UpdateUserComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

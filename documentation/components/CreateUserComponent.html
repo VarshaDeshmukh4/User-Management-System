@@ -158,7 +158,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createCustomer" >createCustomer</a>
+                                <a href="#createUser" >createUser</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -261,24 +261,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createCustomer"></a>
+                    <a name="createUser"></a>
                     <span class="name">
-                        <span ><b>createCustomer</b></span>
-                        <a href="#createCustomer"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>createUser</b></span>
+                        <a href="#createUser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createCustomer()</code>
+<code>createUser()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/dashboard/create-user/create-user.component.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/dashboard/create-user/create-user.component.ts:34</a></div>
                 </td>
             </tr>
 
@@ -314,8 +314,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/app/dashboard/create-user/create-user.component.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/dashboard/create-user/create-user.component.ts:32</a></div>
                 </td>
             </tr>
 
@@ -484,74 +484,90 @@ export class CreateUserComponent implements OnInit {
     this.createUserForm &#x3D; formBuilder.group({
       id: [0],
       name: [&#x27;&#x27;, Validators.required],
-      phone: [&#x27;&#x27;],
-      email: [&#x27;&#x27;, Validators.email],
+      phone: [&#x27;&#x27;,Validators.required],
+      email: [&#x27;&#x27;,Validators.required, Validators.email],
+      role: [&#x27;&#x27;,Validators.required],
       age : [&#x27;&#x27;, [Validators.min(0), Validators.max(100), Validators.pattern(&#x27;^[0-9]*&#x27;)]],
-      address: []
+      address: [&#x27;&#x27;],
+      password:[&#x27;&#x27;,Validators.required]
     });
   }
 
   ngOnInit() {}
 
-  createCustomer() {
+  createUser() {
+
     const data &#x3D; {};
     data[&#x27;name&#x27;] &#x3D; this.createUserForm.value.name;
     data[&#x27;phone&#x27;] &#x3D; this.createUserForm.value.phone;
     data[&#x27;email&#x27;] &#x3D; this.createUserForm.value.email;
+    data[&#x27;role&#x27;] &#x3D; this.createUserForm.value.role;
     data[&#x27;age&#x27;] &#x3D; this.createUserForm.value.age;
     data[&#x27;address&#x27;] &#x3D; this.createUserForm.value.address;
+    data[&#x27;password&#x27;] &#x3D; this.createUserForm.value.password;
     if (this.createUserForm.valid) {
+      console.log(&#x27;This is not a valid form.&#x27;, &#x27;Alert!&#x27;);
+      return
+    }
       this.userService.createUser(data).subscribe((res: any) &#x3D;&gt; {
       this.createUserForm.reset();
       this.router.navigate([&#x27;dashboard&#x27;]);
     });
       console.log(&#x27;This is a vaild form.&#x27;, &#x27;Success!&#x27;);
-    } else {
-     console.log(&#x27;This is not a valid form.&#x27;, &#x27;Alert!&#x27;);
     }
-  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div fxLayoutAlign&#x3D;&quot;center center&quot; fxFlexFill class&#x3D;&quot;main-div&quot;&gt;
-	&lt;mat-card fxFlex&#x3D;&quot;40&quot;&gt;
-		&lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;User Form&lt;/mat-toolbar&gt;
-		&lt;form [formGroup]&#x3D;&quot;createUserForm&quot; (ngSubmit)&#x3D;&quot;createCustomer()&quot; fxLayoutAlign&#x3D;&quot;stretch&quot; fxLayout&#x3D;&quot;column&quot; class&#x3D;&quot;login-form&quot;&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Name&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot; Name&quot; formControlName&#x3D;&quot;name&quot;&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;name&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;name&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Email&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot;Last Name&quot; formControlName&#x3D;&quot;email&quot;&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;email&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;email&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Phone&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot;phone&quot; formControlName&#x3D;&quot;phone&quot;&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;phone&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;phone&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Age&lt;/mat-label&gt;
-				&lt;input matInput placeholder&#x3D;&quot;Age&quot; formControlName&#x3D;&quot;age&quot;&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;age&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;age&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
-				&lt;mat-label&gt;Address&lt;/mat-label&gt;
-				&lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Address&quot; formControlName&#x3D;&quot;address&quot;&gt;
-				&lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;address&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;address&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
-			&lt;/mat-form-field&gt;
-			&lt;div&gt;
-				&lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;primary&quot; [disabled]&#x3D;&quot;!createUserForm.valid&quot;&gt;Create&lt;/button&gt;
-				&lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;secondary&quot; routerLink&#x3D;&quot;/dashboard&quot;&gt;Cancel&lt;/button&gt;
-			&lt;/div&gt;
-		&lt;/form&gt;
-	&lt;/mat-card&gt;
-&lt;/div&gt; 
-{{createUserForm.value | json}}</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;div fxLayoutAlign&#x3D;&quot;center center&quot; fxFlexFill&gt;
+		&lt;mat-card fxFlex&#x3D;&quot;40&quot;&gt;
+		   &lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;User Form&lt;/mat-toolbar&gt;
+		   &lt;form [formGroup]&#x3D;&quot;createUserForm&quot; (ngSubmit)&#x3D;&quot;createUser()&quot; fxLayoutAlign&#x3D;&quot;stretch&quot; fxLayout&#x3D;&quot;column&quot; class&#x3D;&quot;login-form&quot;&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Name&lt;/mat-label&gt;
+			  &lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Name&quot; formControlName&#x3D;&quot;name&quot;&gt;
+			  &lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;name&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;name&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Email&lt;/mat-label&gt;
+			  &lt;input matInput placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
+			  &lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;email&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;email&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Phone&lt;/mat-label&gt;
+			  &lt;input matInput placeholder&#x3D;&quot;phone&quot; formControlName&#x3D;&quot;phone&quot;&gt;
+			  &lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;phone&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;phone&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Role&lt;/mat-label&gt;
+			  &lt;mat-select formControlName&#x3D;&quot;role&quot; placeholder&#x3D;&quot;Roles&quot;&gt;
+				 &lt;mat-option [value]&#x3D;&quot;&#x27;Admin&#x27;&quot;&gt;Admin&lt;/mat-option&gt;
+				 &lt;mat-option [value]&#x3D;&quot;&#x27;User&#x27;&quot;&gt;User&lt;/mat-option&gt;
+			  &lt;/mat-select&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Age&lt;/mat-label&gt;
+			  &lt;input matInput placeholder&#x3D;&quot;Age&quot; formControlName&#x3D;&quot;age&quot;&gt;
+			  &lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;age&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;age&#x27;].touched &quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Address&lt;/mat-label&gt;
+			  &lt;input matInput placeholder&#x3D;&quot;Address&quot; formControlName&#x3D;&quot;address&quot;&gt;
+			  &lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;address&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;address&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;mat-form-field class&#x3D;&quot;form-element&quot;&gt;
+			  &lt;mat-label&gt;Password&lt;/mat-label&gt;
+			  &lt;input matInput type&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
+			  &lt;mat-error *ngIf&#x3D;&quot;!createUserForm.controls[&#x27;password&#x27;].valid &amp;&amp; createUserForm.controls[&#x27;password&#x27;].touched&quot;&gt; {{ titleAlert }} &lt;/mat-error&gt;
+		   &lt;/mat-form-field&gt;
+		   &lt;div&gt;
+			  &lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;primary&quot; [disabled]&#x3D;&quot;createUserForm.invalid&quot;&gt;Create&lt;/button&gt;
+			  &lt;button mat-raised-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;secondary&quot; routerLink&#x3D;&quot;/dashboard&quot;&gt;Cancel&lt;/button&gt;
+		   &lt;/div&gt;
+		   &lt;/form&gt;
+		&lt;/mat-card&gt;
+	 &lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -586,8 +602,8 @@ export class CreateUserComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div fxLayoutAlign="center center" fxFlexFill class="main-div">	<mat-card fxFlex="40">		<mat-toolbar color="primary">User Form</mat-toolbar>		<form [formGroup]="createUserForm" (ngSubmit)="createCustomer()" fxLayoutAlign="stretch" fxLayout="column" class="login-form">			<mat-form-field class="form-element">				<mat-label>Name</mat-label>				<input matInput placeholder=" Name" formControlName="name">				<mat-error *ngIf="!createUserForm.controls[\'name\'].valid && createUserForm.controls[\'name\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Email</mat-label>				<input matInput placeholder="Last Name" formControlName="email">				<mat-error *ngIf="!createUserForm.controls[\'email\'].valid && createUserForm.controls[\'email\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Phone</mat-label>				<input matInput placeholder="phone" formControlName="phone">				<mat-error *ngIf="!createUserForm.controls[\'phone\'].valid && createUserForm.controls[\'phone\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Age</mat-label>				<input matInput placeholder="Age" formControlName="age">				<mat-error *ngIf="!createUserForm.controls[\'age\'].valid && createUserForm.controls[\'age\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<mat-form-field class="form-element">				<mat-label>Address</mat-label>				<input matInput type="text" placeholder="Address" formControlName="address">				<mat-error *ngIf="!createUserForm.controls[\'address\'].valid && createUserForm.controls[\'address\'].touched"> {{ titleAlert }} </mat-error>			</mat-form-field>			<div>				<button mat-raised-button type="submit" color="primary" [disabled]="!createUserForm.valid">Create</button>				<button mat-raised-button type="submit" color="secondary" routerLink="/dashboard">Cancel</button>			</div>		</form>	</mat-card></div> {{createUserForm.value | json}}</div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateUserComponent', 'selector': 'app-create-user'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'UpdateUserComponent', 'selector': 'app-update-user'},{'name': 'ViewUserComponent', 'selector': 'app-view-user'}];
+        var COMPONENT_TEMPLATE = '<div><div fxLayoutAlign="center center" fxFlexFill>		<mat-card fxFlex="40">		   <mat-toolbar color="primary">User Form</mat-toolbar>		   <form [formGroup]="createUserForm" (ngSubmit)="createUser()" fxLayoutAlign="stretch" fxLayout="column" class="login-form">		   <mat-form-field class="form-element">			  <mat-label>Name</mat-label>			  <input matInput type="text" placeholder="Name" formControlName="name">			  <mat-error *ngIf="!createUserForm.controls[\'name\'].valid && createUserForm.controls[\'name\'].touched"> {{ titleAlert }} </mat-error>		   </mat-form-field>		   <mat-form-field class="form-element">			  <mat-label>Email</mat-label>			  <input matInput placeholder="Email" formControlName="email">			  <mat-error *ngIf="!createUserForm.controls[\'email\'].valid && createUserForm.controls[\'email\'].touched"> {{ titleAlert }} </mat-error>		   </mat-form-field>		   <mat-form-field class="form-element">			  <mat-label>Phone</mat-label>			  <input matInput placeholder="phone" formControlName="phone">			  <mat-error *ngIf="!createUserForm.controls[\'phone\'].valid && createUserForm.controls[\'phone\'].touched"> {{ titleAlert }} </mat-error>		   </mat-form-field>		   <mat-form-field class="form-element">			  <mat-label>Role</mat-label>			  <mat-select formControlName="role" placeholder="Roles">				 <mat-option [value]="\'Admin\'">Admin</mat-option>				 <mat-option [value]="\'User\'">User</mat-option>			  </mat-select>		   </mat-form-field>		   <mat-form-field class="form-element">			  <mat-label>Age</mat-label>			  <input matInput placeholder="Age" formControlName="age">			  <mat-error *ngIf="!createUserForm.controls[\'age\'].valid && createUserForm.controls[\'age\'].touched "> {{ titleAlert }} </mat-error>		   </mat-form-field>		   <mat-form-field class="form-element">			  <mat-label>Address</mat-label>			  <input matInput placeholder="Address" formControlName="address">			  <mat-error *ngIf="!createUserForm.controls[\'address\'].valid && createUserForm.controls[\'address\'].touched"> {{ titleAlert }} </mat-error>		   </mat-form-field>		   <mat-form-field class="form-element">			  <mat-label>Password</mat-label>			  <input matInput type="password" placeholder="Password" formControlName="password">			  <mat-error *ngIf="!createUserForm.controls[\'password\'].valid && createUserForm.controls[\'password\'].touched"> {{ titleAlert }} </mat-error>		   </mat-form-field>		   <div>			  <button mat-raised-button type="submit" color="primary" [disabled]="createUserForm.invalid">Create</button>			  <button mat-raised-button type="submit" color="secondary" routerLink="/dashboard">Cancel</button>		   </div>		   </form>		</mat-card>	 </div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateUserComponent', 'selector': 'app-create-user'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'UpdateUserComponent', 'selector': 'app-update-user'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'ViewUserComponent', 'selector': 'app-view-user'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CreateUserComponent'};
 </script>

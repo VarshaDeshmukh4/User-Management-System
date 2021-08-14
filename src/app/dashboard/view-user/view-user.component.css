@@ -1,10 +1,7 @@
-.mt-top{
-    margin: 20px !important;
-    float:right;
-}
-.no-data{
-    padding: 10px;
-    text-align: center;
-    color: blue;
-    font-weight: 100;
-}
+.example-card {
+    max-width: 400px;
+  }
+  .mt-top{
+    float: right;
+    padding: 40px;
+  }

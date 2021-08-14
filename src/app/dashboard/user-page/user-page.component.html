@@ -1,0 +1,44 @@
+<div
+    (click)="onEdit()"
+    fxLayoutAlign="center center"
+    fxFlexFill
+    class="main-div"
+>
+    <mat-card
+        class="example-card mat-elevation-z8"
+        class="user-profile"
+        fxFlex="30"
+    >
+        <mat-toolbar color="primary">User Profile</mat-toolbar>
+        <mat-card-header>
+            <div
+                mat-card-avatar
+                class="example-header-image"
+            ></div>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p>
+                <span>Name:-</span>
+                {{userData?.name}}
+            </p>
+            <p>
+                <span>Age:-</span>
+                {{userData?.age}}
+            </p>
+            <p>
+                <span>Phone:-</span>
+                {{userData?.phone}}
+            </p>
+            <p>
+                <span>Email:-</span>
+                {{userData?.email}}
+            </p>
+            <p>
+                <span>Address:-</span>
+                {{userData?.address}}
+            </p>
+        </mat-card-content>
+
+    </mat-card>
+</div>

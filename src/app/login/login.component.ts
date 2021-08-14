@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
   ) {}
 
   get f() {
-    return this .loginForm.controls;
+    return this.loginForm.controls;
   }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params.id;
-    console.log(this.userId)
+    console.log(this.userId);
     this.loginForm = this.fb.group({
       email: [null, Validators.required],
       password: [null, Validators.required],
@@ -52,13 +52,15 @@ export class LoginComponent implements OnInit {
             ) {
               this.authenticationService.setUserRole(users.role);
               this.authenticationService.setUserName(users.name);
+              if (users.role === "Admin") {
                 this.router.navigate(["dashboard"]);
+              } else if (users.role === "User") {
+                this.router.navigate(["dashboard/userpage/", users.id]);
+              }
             }
-
           });
         },
-        (error) => {
-        }
+        (error) => {}
       );
     }
   }

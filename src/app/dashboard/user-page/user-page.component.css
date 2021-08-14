@@ -1,0 +1,16 @@
+.main-div mat-card{
+    padding: 0px;
+}
+.user-profile{
+    padding: 30px;
+}
+p{
+    padding: 5px 0px 25px 2px;
+  font-weight: 300;
+  color:black;
+  }
+  span{
+      padding: 20px;
+      color: black;
+      font-weight: 700;
+  }

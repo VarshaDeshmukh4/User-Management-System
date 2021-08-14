@@ -17,5 +17,4 @@ export class DashboardComponent implements OnInit {
   logout() {
     this.authenticationService.logout();
   }
-
 }
