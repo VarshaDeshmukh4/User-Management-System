@@ -13,6 +13,8 @@ export class UpdateUserComponent implements OnInit {
   customer: any;
   id: any;
   isReadonly: boolean;
+  userRole: string;
+  userId: any;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -32,10 +34,11 @@ export class UpdateUserComponent implements OnInit {
   }
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id");
-    const userRole = localStorage.getItem("userRole");
-    if (userRole === "user") {
+    this.userRole = localStorage.getItem("userRole");
+    this.userId = this.route.snapshot.params.id;
+    if (this.userRole === "User") {
       this.isReadonly = false;
-    } else if (userRole === "Admin") {
+    } else if (this.userRole === "Admin") {
       this.isReadonly = true;
     }
     this.userService.getUserDetails(this.id).subscribe((response) => {
@@ -51,19 +54,26 @@ export class UpdateUserComponent implements OnInit {
   }
 
   updateUser() {
-    const userId = this.route.snapshot.params.id;
-    console.log(userId);
     if (window.confirm("Are you sure you want to update?")) {
       this.userService
         .getUserUpdate(this.id, this.updateUserForm.value)
         .subscribe((res) => {
           const userRole = localStorage.getItem("userRole");
-          if (userRole === "user") {
-            this.router.navigate(["dashboard"]);
+          if (userRole === "User") {
+            this.router.navigate(["dashboard/userpage/", this.userId]);
           } else if (userRole === "Admin") {
             this.router.navigate(["dashboard"]);
           }
         });
+    }
+  }
+
+  cancel() {
+    const userRole = localStorage.getItem("userRole");
+    if (userRole === "User") {
+      this.router.navigate(["dashboard/userpage/", this.userId]);
+    } else if (userRole === "Admin") {
+      this.router.navigate(["dashboard"]);
     }
   }
 }

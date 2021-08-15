@@ -41,7 +41,7 @@
 				</mat-form-field>
 				<div>
 					<button mat-raised-button type="submit" color="primary" [disabled]="!updateUserForm.valid"> Update </button>
-					<button mat-raised-button type="submit" color="secondary" routerLink="/dashboard"> Cancel </button>
+					<button mat-raised-button type="submit" color="secondary" (click)="cancel()"> Cancel </button>
 				</div>
 			</form>
 		</mat-card>

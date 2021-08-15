@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
   titleAlert = "This field is required";
   submitted = false;
   returnUrl: string;
-  userId: any;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -26,8 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.params.id;
-    console.log(this.userId);
     this.loginForm = this.fb.group({
       email: [null, Validators.required],
       password: [null, Validators.required],
@@ -36,7 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userId = this.route.snapshot.params.id;
     this.submitted = true;
     const data = {};
     data["email"] = this.loginForm.value.email;

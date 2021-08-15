@@ -1,0 +1,24 @@
+{
+  "Loginuser": [
+    {
+      "id": 1,
+      "name": "Varsha Deshmukh",
+      "phone": "+18555372725",
+      "role": "Admin",
+      "email": "admin@gmail.com",
+      "age": 35,
+      "address": "173 Bath Avenue, Farmington, New Hampshire, 3445",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "name": "Ajinkya Deshmukh",
+      "phone": "+1 9675302757",
+      "role": "User",
+      "email": "aj@gmail.com",
+      "age": 22,
+      "address": "195 Maple Avenue, Sparkill, New Mexico, 4597",
+      "password": "123456"
+    }
+  ]
+}

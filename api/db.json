@@ -19,6 +19,36 @@
       "age": 22,
       "address": "195 Maple Avenue, Sparkill, New Mexico, 4597",
       "password": "123456"
+    },
+    {
+      "id": 3,
+      "name": "Megha Ingle",
+      "phone": "+1 9675302757",
+      "role": "User",
+      "email": "megha@gmail.com",
+      "age": 22,
+      "address": "195 Maple Avenue, Sparkill, New Mexico, 4597",
+      "password": "123456"
+    },
+    {
+      "id": 4,
+      "name": "john",
+      "phone": "5434534543",
+      "role": "User",
+      "email": "john@gmail.com",
+      "age": "34",
+      "address": "jp lakd;s skmdasmd",
+      "password": "123456"
+    },
+    {
+      "id": 5,
+      "name": "Maria",
+      "phone": "748375475",
+      "role": "User",
+      "email": "maria@gmail.com",
+      "age": "55",
+      "address": "ejrljewr wenrkwjer wenrkjwelk",
+      "password": "123456"
     }
   ]
 }
